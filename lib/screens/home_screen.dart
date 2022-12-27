@@ -1,8 +1,9 @@
-import 'dart:developer';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:social_app/model/post_model.dart';
+import 'package:social_app/screens/create_postscreen.dart';
+import 'package:social_app/screens/update_postscreen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -50,7 +51,9 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Get.to(() => UpdatePostScreen());
+                            },
                             child: Text(
                               "Edit Post",
                               style: TextStyle(),
@@ -67,42 +70,71 @@ class HomeScreen extends StatelessWidget {
               );
             }),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(() => CreatePostScreen());
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }
 
-Widget posts({
-  String? title,
-  String? subtitle,
-  String? description,
-}) {
-  var likeCounter = 0.obs;
-  var emotionCounter = 0.obs;
-  var heartCounter = 0.obs;
-  var rocketCounter = 0.obs;
-  var cakeCounter = 0.obs;
 
-  void likeincrement() {
-    likeCounter++;
-  }
 
-  void emotionincrement() {
-    emotionCounter++;
-  }
 
-  void rocketincrement() {
-    rocketCounter++;
-  }
 
-  void heartincrement() {
-    heartCounter++;
-  }
 
-  void cakeincrement() {
-    cakeCounter++;
-  }
 
-  return Stack(children: [
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Widget posts({
+//   String? title,
+//   String? subtitle,
+//   String? description,
+// }) {
+//   var likeCounter = 0.obs;
+//   var emotionCounter = 0.obs;
+//   var heartCounter = 0.obs;
+//   var rocketCounter = 0.obs;
+//   var cakeCounter = 0.obs;
+
+//   void likeincrement() {
+//     likeCounter++;
+//   }
+
+//   void emotionincrement() {
+//     emotionCounter++;
+//   }
+
+//   void rocketincrement() {
+//     rocketCounter++;
+//   }
+
+//   void heartincrement() {
+//     heartCounter++;
+//   }
+
+//   void cakeincrement() {
+//     cakeCounter++;
+//   }
+
+//   return Stack(children: [
     //       Row(
     //         children: [
     //           IconButton(
@@ -182,8 +214,8 @@ Widget posts({
     //           })
     //         ],
     //       ),
-    //     ],
-    //   ),
-    // ),
-  ]);
-}
+//         ],
+//       ),
+//     ),
+//   ]);
+// }
