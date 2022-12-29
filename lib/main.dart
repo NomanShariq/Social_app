@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:social_app/model/post_model.dart';
 import 'package:social_app/screens/create_postscreen.dart';
 import 'package:social_app/screens/home_screen.dart';
+import 'package:social_app/screens/post_details.dart';
 
 void main() {
   runApp(MyApp());

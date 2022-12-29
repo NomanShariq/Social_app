@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:social_app/model/post_model.dart';
 import 'package:social_app/screens/create_postscreen.dart';
+import 'package:social_app/screens/post_details.dart';
 import 'package:social_app/screens/update_postscreen.dart';
 import 'package:uuid/uuid.dart';
 
@@ -53,43 +54,60 @@ class _HomeScreenState extends State<HomeScreen> {
         child: ListView.builder(
             itemCount: posts.length,
             itemBuilder: (context, index) {
-              return Container(
-                margin: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: Colors.black, width: 1),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      posts[index].title.toString(),
-                      style:
-                          TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                    ),
-                    Text(posts[index].subtitle.toString(),
-                        style: TextStyle(fontSize: 17)),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        TextButton(
-                            onPressed: () {
-                              Get.to(() => UpdatePostScreen());
-                            },
-                            child: Text(
-                              "Edit Post",
-                              style: TextStyle(),
-                            )),
-                        Text(posts[index].description.toString()),
-                        Text(
-                          " less than one minute ago",
-                          style: TextStyle(fontStyle: FontStyle.italic),
-                        )
-                      ],
-                    ),
-                  ],
+              return InkWell(
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PostDetails(posts: posts[index]))),
+                child: Container(
+                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border.all(color: Colors.black, width: 1),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        posts[index].title.toString(),
+                        style: TextStyle(
+                            fontSize: 28, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(posts[index].subtitle.toString(),
+                          style: TextStyle(fontSize: 17)),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(posts[index].description.toString()),
+                          Text(
+                            " less than one minute ago",
+                            style: TextStyle(fontStyle: FontStyle.italic),
+                          )
+                        ],
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Get.to(() => UpdatePostScreen());
+                          },
+                          style: ButtonStyle(
+                            padding: MaterialStateProperty.all<EdgeInsets>(
+                                EdgeInsets.fromLTRB(0, 0, 0, 0)),
+                          ),
+                          child: Text(
+                            "Edit Post",
+                            style: TextStyle(),
+                          )),
+                    ],
+                  ),
                 ),
               );
             }),
