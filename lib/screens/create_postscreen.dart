@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 
-class CreatePostScreen extends StatelessWidget {
-  const CreatePostScreen(void Function(String title, String subtitle, String desc) addnewPost, {super.key});
+class CreatePostScreen extends StatefulWidget {
+  final Function addpost;
+  const CreatePostScreen(this.addpost, {super.key});
 
+  @override
+  State<CreatePostScreen> createState() => _CreatePostScreenState();
+}
+
+class _CreatePostScreenState extends State<CreatePostScreen> {
   @override
   Widget build(BuildContext context) {
     TextEditingController titlecont = TextEditingController();
@@ -14,7 +20,7 @@ class CreatePostScreen extends StatelessWidget {
       final enteredtitle = titlecont.text;
       final enteredsubtitle = subtitlecont.text;
       final entereddesc = descrptionController.text;
-
+      widget.addpost(enteredtitle, enteredsubtitle, entereddesc);
       Navigator.of(context).pop();
     }
 

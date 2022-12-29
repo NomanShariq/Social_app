@@ -17,30 +17,19 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController titlecont = TextEditingController();
   TextEditingController subtitlecont = TextEditingController();
   TextEditingController descrptionController = TextEditingController();
-  
-  
-   final List<PostModel> posts;
+
+  final List<PostModel> posts = [];
 
   void addnewPost(String title, String subtitle, String desc) {
     final newPost = PostModel(
       title: title,
       subtitle: subtitle,
       description: desc,
-      id: Uuid.NAMESPACE_DNS,
+      id: DateTime.now().toString(),
     );
     setState(() {
       posts.add(newPost);
     });
-  }
-
-  void startaddnewpost(BuildContext ctx) {
-    showBottomSheet(
-        context: ctx,
-        builder: (_) {
-          return GestureDetector(
-            child: CreatePostScreen(addnewPost),
-          );
-        });
   }
 
   @override
@@ -107,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(() => CreatePostScreen(addnewPost));
+          Get.to(CreatePostScreen(addnewPost));
         },
         child: Icon(Icons.add),
       ),
