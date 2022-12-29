@@ -2,10 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class CreatePostScreen extends StatelessWidget {
-  const CreatePostScreen({super.key});
+  const CreatePostScreen(void Function(String title, String subtitle, String desc) addnewPost, {super.key});
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController titlecont = TextEditingController();
+    TextEditingController subtitlecont = TextEditingController();
+    TextEditingController descrptionController = TextEditingController();
+
+    void submit() {
+      final enteredtitle = titlecont.text;
+      final enteredsubtitle = subtitlecont.text;
+      final entereddesc = descrptionController.text;
+
+      Navigator.of(context).pop();
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -33,7 +45,11 @@ class CreatePostScreen extends StatelessWidget {
                       "Title:",
                       style: TextStyle(fontSize: 24),
                     ),
-                    TextFormField(
+                    TextField(
+                      onSubmitted: (_) {
+                        submit();
+                      },
+                      controller: titlecont,
                       decoration: InputDecoration(
                           isDense: true,
                           border: OutlineInputBorder(
@@ -48,7 +64,9 @@ class CreatePostScreen extends StatelessWidget {
                       "Subtitle:",
                       style: TextStyle(fontSize: 24),
                     ),
-                    TextFormField(
+                    TextField(
+                      onSubmitted: (value) => submit(),
+                      controller: subtitlecont,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -62,7 +80,9 @@ class CreatePostScreen extends StatelessWidget {
                       "Description:",
                       style: TextStyle(fontSize: 24),
                     ),
-                    TextFormField(
+                    TextField(
+                      onSubmitted: (value) => submit(),
+                      controller: descrptionController,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -75,7 +95,9 @@ class CreatePostScreen extends StatelessWidget {
                     Center(
                       child: ElevatedButton(
                         child: Text("Submit"),
-                        onPressed: () {},
+                        onPressed: () {
+                          submit();
+                        },
                         style: ButtonStyle(
                             fixedSize: MaterialStateProperty.all(Size(84, 44))),
                       ),

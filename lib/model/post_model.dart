@@ -2,20 +2,20 @@ import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 
 class PostModel extends ChangeNotifier {
-  String? id;
-  String? title;
-  String? subtitle;
-  String? description;
+  String id;
+  String title;
+  String subtitle;
+  String description;
 
   PostModel({
-     this.id,
-     this.title,
-     this.subtitle,
-     this.description,
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.description,
   }) : super();
-
 }
-class postData with ChangeNotifier{
+
+class postData with ChangeNotifier {
   final List<PostModel> _items = [
     PostModel(
         id: "1",
@@ -37,8 +37,8 @@ class postData with ChangeNotifier{
   List<PostModel> get items {
     return [..._items];
   }
-PostModel findById(String id){
-      return _items.firstWhere((post) => post.id == id);
-}
 
+  PostModel findById(String id) {
+    return _items.firstWhere((post) => post.id == id);
+  }
 }

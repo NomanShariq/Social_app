@@ -4,14 +4,49 @@ import 'package:get/get.dart';
 import 'package:social_app/model/post_model.dart';
 import 'package:social_app/screens/create_postscreen.dart';
 import 'package:social_app/screens/update_postscreen.dart';
+import 'package:uuid/uuid.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  TextEditingController titlecont = TextEditingController();
+  TextEditingController subtitlecont = TextEditingController();
+  TextEditingController descrptionController = TextEditingController();
+  
+  
+   final List<PostModel> posts;
+
+  void addnewPost(String title, String subtitle, String desc) {
+    final newPost = PostModel(
+      title: title,
+      subtitle: subtitle,
+      description: desc,
+      id: Uuid.NAMESPACE_DNS,
+    );
+    setState(() {
+      posts.add(newPost);
+    });
+  }
+
+  void startaddnewpost(BuildContext ctx) {
+    showBottomSheet(
+        context: ctx,
+        builder: (_) {
+          return GestureDetector(
+            child: CreatePostScreen(addnewPost),
+          );
+        });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final postDetails = Provider.of<postData>(context);
-    final rawData = postDetails.items; // var counter = 0.obs;
+    // final postDetails = Provider.of<postData>(context);
+    // final rawData = postDetails.items; // var counter = 0.obs;
     // void increment() {
     //   counter++;
     // }
@@ -27,7 +62,7 @@ class HomeScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(30),
         ),
         child: ListView.builder(
-            itemCount: rawData.length,
+            itemCount: posts.length,
             itemBuilder: (context, index) {
               return Container(
                 margin: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
@@ -41,11 +76,11 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      rawData[index].title.toString(),
+                      posts[index].title.toString(),
                       style:
                           TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                     ),
-                    Text(rawData[index].subtitle.toString(),
+                    Text(posts[index].subtitle.toString(),
                         style: TextStyle(fontSize: 17)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -58,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                               "Edit Post",
                               style: TextStyle(),
                             )),
-                        Text(rawData[index].description.toString()),
+                        Text(posts[index].description.toString()),
                         Text(
                           " less than one minute ago",
                           style: TextStyle(fontStyle: FontStyle.italic),
@@ -72,7 +107,7 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.to(() => CreatePostScreen());
+          Get.to(() => CreatePostScreen(addnewPost));
         },
         child: Icon(Icons.add),
       ),
