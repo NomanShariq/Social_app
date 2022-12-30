@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
+
 import 'package:social_app/model/post_model.dart';
 import 'package:social_app/screens/update_postscreen.dart';
 
 class PostDetails extends StatelessWidget {
   final PostModel posts;
-  const PostDetails({super.key, required this.posts});
+  final Function deletePost;
+  const PostDetails({
+    Key? key,
+    required this.posts,
+    required this.deletePost,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +21,7 @@ class PostDetails extends StatelessWidget {
         centerTitle: true,
       ),
       body: Container(
-        height: 150,
+        height: 190,
         width: 400,
         margin: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
         decoration: BoxDecoration(
@@ -24,33 +29,49 @@ class PostDetails extends StatelessWidget {
           border: Border.all(color: Colors.black, width: 1),
           borderRadius: BorderRadius.circular(30),
         ),
-        padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+        padding: EdgeInsets.fromLTRB(20, 20, 5, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              posts.title,
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-            ),
-            Text(posts.subtitle, style: TextStyle(fontSize: 17)),
             Row(
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TextButton(
-                    onPressed: () {
-                      Get.to(() => UpdatePostScreen());
-                    },
-                    child: Text(
-                      "Edit Post",
-                      style: TextStyle(),
-                    )),
-                Text(posts.description),
                 Text(
-                  " less than one minute ago",
-                  style: TextStyle(fontStyle: FontStyle.italic),
+                  posts.title,
+                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                ),
+                Row(
+                  children: [
+                    IconButton(
+                        iconSize: 30,
+                        color: Colors.green,
+                        onPressed: () {
+                          Get.to(() => UpdatePostScreen(posts));
+                        },
+                        icon: Icon(Icons.edit)),
+                    IconButton(
+                        iconSize: 30,
+                        color: Colors.red,
+                        onPressed: (() => deletePost),
+                        icon: Icon(Icons.delete)),
+                  ],
                 )
               ],
             ),
+            Text(posts.subtitle,
+                style: TextStyle(fontSize: 17, color: Colors.grey)),
+            SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Expanded(child: Text(posts.description)),
+              ],
+            ),
+            SizedBox(height: 5),
+            Text(
+              " less than one minute ago",
+              style: TextStyle(fontStyle: FontStyle.italic),
+            )
           ],
         ),
       ),

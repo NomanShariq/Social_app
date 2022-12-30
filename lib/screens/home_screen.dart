@@ -35,12 +35,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final postDetails = Provider.of<postData>(context);
-    // final rawData = postDetails.items; // var counter = 0.obs;
-    // void increment() {
-    //   counter++;
-    // }
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Social App"),
@@ -58,8 +52,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            PostDetails(posts: posts[index]))),
+                        builder: (context) => PostDetails(
+                              posts: posts[index],
+                              deletePost: () {
+                                posts.removeWhere(
+                                    (element) => element.id == index);
+                              },
+                            ))),
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
                   decoration: BoxDecoration(
@@ -76,34 +75,44 @@ class _HomeScreenState extends State<HomeScreen> {
                         style: TextStyle(
                             fontSize: 28, fontWeight: FontWeight.bold),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
                       Text(posts[index].subtitle.toString(),
-                          style: TextStyle(fontSize: 17)),
+                          style: TextStyle(fontSize: 17, color: Colors.grey)),
                       SizedBox(
-                        height: 10,
+                        height: 5,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(posts[index].description.toString()),
-                          Text(
-                            " less than one minute ago",
-                            style: TextStyle(fontStyle: FontStyle.italic),
-                          )
+                          Expanded(
+                            child: Text(
+                              posts[index].description.toString(),
+                              maxLines: 1,
+                              softWrap: false,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
                         ],
+                      ),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        " less than one minute ago",
+                        style: TextStyle(fontStyle: FontStyle.italic),
                       ),
                       TextButton(
                           onPressed: () {
-                            Get.to(() => UpdatePostScreen());
+                            Get.to(() => PostDetails(
+                                  posts: posts[index],
+                                  deletePost: () {},
+                                ));
                           },
                           style: ButtonStyle(
                             padding: MaterialStateProperty.all<EdgeInsets>(
                                 EdgeInsets.fromLTRB(0, 0, 0, 0)),
                           ),
                           child: Text(
-                            "Edit Post",
+                            "For More Information",
                             style: TextStyle(),
                           )),
                     ],
@@ -113,6 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }),
       ),
       floatingActionButton: FloatingActionButton(
+        elevation: 0,
         onPressed: () {
           Get.to(CreatePostScreen(addnewPost));
         },

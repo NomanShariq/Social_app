@@ -14,31 +14,3 @@ class PostModel extends ChangeNotifier {
     required this.description,
   }) : super();
 }
-
-class postData with ChangeNotifier {
-  final List<PostModel> _items = [
-    PostModel(
-        id: "1",
-        title: "Short Note",
-        subtitle: "subtitle",
-        description: "description"),
-    PostModel(
-        id: "2",
-        title: "Short Note",
-        subtitle: "subtitle",
-        description: "description"),
-    PostModel(
-        id: "3",
-        title: "Short Note",
-        subtitle: "subtitle",
-        description: "description"),
-  ];
-
-  List<PostModel> get items {
-    return [..._items];
-  }
-
-  PostModel findById(String id) {
-    return _items.firstWhere((post) => post.id == id);
-  }
-}
