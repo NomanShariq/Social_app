@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: "This is second post",
         subtitle: "subtitle",
         description:
-            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"),
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book,"),
     PostModel(
         id: "3",
         title: "This is third post",
@@ -69,76 +69,79 @@ class _HomeScreenState extends State<HomeScreen> {
         child: ListView.builder(
             itemCount: posts.length,
             itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PostDetails(
-                              post: posts[index],
-                              deletePost: (String id) {
-                                setState(() {
-                                  posts.removeWhere((post) => post.id == id);
-                                });
-                                Navigator.pop(context);
-                              },
-                            ))),
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.black, width: 1),
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        posts[index].title.toString(),
-                        style: TextStyle(
-                            fontSize: 28, fontWeight: FontWeight.bold),
-                      ),
-                      Text(posts[index].subtitle.toString(),
-                          style: TextStyle(fontSize: 17, color: Colors.grey)),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              posts[index].description.toString(),
-                              maxLines: 1,
-                              softWrap: false,
-                              overflow: TextOverflow.ellipsis,
+              return Material(
+                color: Colors.black,
+                child: GestureDetector(
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PostDetails(
+                                post: posts[index],
+                                deletePost: (String id) {
+                                  setState(() {
+                                    posts.removeWhere((post) => post.id == id);
+                                  });
+                                  Navigator.pop(context);
+                                },
+                              ))),
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.black, width: 1),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          posts[index].title.toString(),
+                          style: TextStyle(
+                              fontSize: 28, fontWeight: FontWeight.bold),
+                        ),
+                        Text(posts[index].subtitle.toString(),
+                            style: TextStyle(fontSize: 17, color: Colors.grey)),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                posts[index].description.toString(),
+                                maxLines: 1,
+                                softWrap: false,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        " less than one minute ago",
-                        style: TextStyle(fontStyle: FontStyle.italic),
-                      ),
-                      TextButton(
-                          onPressed: () {
-                            Get.to(() => PostDetails(
-                                  post: posts[index],
-                                  deletePost: () {},
-                                ));
-                          },
-                          style: ButtonStyle(
-                            padding: MaterialStateProperty.all<EdgeInsets>(
-                                EdgeInsets.fromLTRB(0, 0, 0, 0)),
-                          ),
-                          child: Text(
-                            "For More Information",
-                            style: TextStyle(),
-                          )),
-                    ],
+                          ],
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          " less than one minute ago",
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              Get.to(() => PostDetails(
+                                    post: posts[index],
+                                    deletePost: () {},
+                                  ));
+                            },
+                            style: ButtonStyle(
+                              padding: MaterialStateProperty.all<EdgeInsets>(
+                                  EdgeInsets.fromLTRB(0, 0, 0, 0)),
+                            ),
+                            child: Text(
+                              "For More Information",
+                              style: TextStyle(),
+                            )),
+                      ],
+                    ),
                   ),
                 ),
               );
