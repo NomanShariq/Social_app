@@ -5,11 +5,11 @@ import 'package:social_app/model/post_model.dart';
 import 'package:social_app/screens/update_postscreen.dart';
 
 class PostDetails extends StatelessWidget {
-  final PostModel posts;
+  final PostModel post;
   final Function deletePost;
   const PostDetails({
     Key? key,
-    required this.posts,
+    required this.post,
     required this.deletePost,
   }) : super(key: key);
 
@@ -37,7 +37,7 @@ class PostDetails extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  posts.title,
+                  post.title,
                   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                 ),
                 Row(
@@ -46,25 +46,25 @@ class PostDetails extends StatelessWidget {
                         iconSize: 30,
                         color: Colors.green,
                         onPressed: () {
-                          Get.to(() => UpdatePostScreen(posts));
+                          Get.to(() => UpdatePostScreen(post));
                         },
                         icon: Icon(Icons.edit)),
                     IconButton(
                         iconSize: 30,
                         color: Colors.red,
-                        onPressed: (() => deletePost),
+                        onPressed: (() => deletePost(post.id)),
                         icon: Icon(Icons.delete)),
                   ],
                 )
               ],
             ),
-            Text(posts.subtitle,
+            Text(post.subtitle,
                 style: TextStyle(fontSize: 17, color: Colors.grey)),
             SizedBox(height: 5),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Expanded(child: Text(posts.description)),
+                Expanded(child: Text(post.description)),
               ],
             ),
             SizedBox(height: 5),

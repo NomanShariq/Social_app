@@ -19,6 +19,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  var uuid = Uuid();
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class _MyAppState extends State<MyApp> {
       title: title,
       subtitle: subtitle,
       description: desc,
-      id: Uuid.NAMESPACE_DNS.toString(),
+      id: uuid.v4(),
     );
     setState(() {
       posts.add(newPost);
@@ -62,7 +63,7 @@ class _MyAppState extends State<MyApp> {
         });
   }
 
-  void deletePost(String id){
+  void deletePost(String id) {
     setState(() {
       posts.remove((tx) => tx.id == id);
     });

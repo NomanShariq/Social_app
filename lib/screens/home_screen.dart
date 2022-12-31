@@ -19,14 +19,35 @@ class _HomeScreenState extends State<HomeScreen> {
   TextEditingController subtitlecont = TextEditingController();
   TextEditingController descrptionController = TextEditingController();
 
-  final List<PostModel> posts = [];
+  var uuid = Uuid();
+
+  final List<PostModel> posts = [
+    PostModel(
+        id: "1",
+        title: "This is first post",
+        subtitle: "subtitle",
+        description:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"),
+    PostModel(
+        id: "2",
+        title: "This is second post",
+        subtitle: "subtitle",
+        description:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"),
+    PostModel(
+        id: "3",
+        title: "This is third post",
+        subtitle: "subtitle",
+        description:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"),
+  ];
 
   void addnewPost(String title, String subtitle, String desc) {
     final newPost = PostModel(
       title: title,
       subtitle: subtitle,
       description: desc,
-      id: DateTime.now().toString(),
+      id: uuid.v4(),
     );
     setState(() {
       posts.add(newPost);
@@ -53,10 +74,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => PostDetails(
-                              posts: posts[index],
-                              deletePost: () {
-                                posts.removeWhere(
-                                    (element) => element.id == index);
+                              post: posts[index],
+                              deletePost: (String id) {
+                                setState(() {
+                                  posts.removeWhere((post) => post.id == id);
+                                });
+                                Navigator.pop(context);
                               },
                             ))),
                 child: Container(
@@ -103,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       TextButton(
                           onPressed: () {
                             Get.to(() => PostDetails(
-                                  posts: posts[index],
+                                  post: posts[index],
                                   deletePost: () {},
                                 ));
                           },
