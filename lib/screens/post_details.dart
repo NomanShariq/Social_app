@@ -21,8 +21,7 @@ class PostDetails extends StatelessWidget {
         centerTitle: true,
       ),
       body: Container(
-        height: 190,
-        width: 400,
+        constraints: BoxConstraints.expand(height: 280),
         margin: EdgeInsets.symmetric(horizontal: 10, vertical: 25),
         decoration: BoxDecoration(
           color: Colors.white,
