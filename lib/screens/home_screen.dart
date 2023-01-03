@@ -70,81 +70,68 @@ class _HomeScreenState extends State<HomeScreen> {
             itemCount: posts.length,
             itemBuilder: (context, index) {
               return Material(
-                color: Colors.transparent,
-                child: GestureDetector(
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PostDetails(
-                                post: posts[index],
-                                deletePost: (String id) {
-                                  setState(() {
-                                    posts.removeWhere((post) => post.id == id);
-                                  });
-                                  Navigator.pop(context);
-                                },
-                              ))),
-                  child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(color: Colors.black, width: 1),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          posts[index].title.toString(),
-                          style: TextStyle(
-                              fontSize: 28, fontWeight: FontWeight.bold),
-                        ),
-                        Text(posts[index].subtitle.toString(),
-                            style: TextStyle(fontSize: 17, color: Colors.grey)),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                posts[index].description.toString(),
-                                maxLines: 1,
-                                softWrap: false,
-                                overflow: TextOverflow.ellipsis,
+                  color: Colors.transparent,
+                  child: GestureDetector(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PostDetails(
+                                  post: posts[index],
+                                  deletePost: (String id) {
+                                    setState(() {
+                                      posts
+                                          .removeWhere((post) => post.id == id);
+                                    });
+                                    Navigator.pop(context);
+                                  },
+                                ))),
+                    child: Container(
+                      margin:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.black, width: 1),
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      padding: EdgeInsets.fromLTRB(20, 20, 0, 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            posts[index].title.toString(),
+                            style: TextStyle(
+                                fontSize: 28, fontWeight: FontWeight.bold),
+                          ),
+                          Text(posts[index].subtitle.toString(),
+                              style:
+                                  TextStyle(fontSize: 17, color: Colors.grey)),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  posts[index].description.toString(),
+                                  maxLines: 1,
+                                  softWrap: false,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          " less than one minute ago",
-                          style: TextStyle(fontStyle: FontStyle.italic),
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              Get.to(() => PostDetails(
-                                    post: posts[index],
-                                    deletePost: () {},
-                                  ));
-                            },
-                            style: ButtonStyle(
-                              padding: MaterialStateProperty.all<EdgeInsets>(
-                                  EdgeInsets.fromLTRB(0, 0, 0, 0)),
-                            ),
-                            child: Text(
-                              "For More Information",
-                              style: TextStyle(),
-                            )),
-                      ],
+                            ],
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            " less than one minute ago",
+                            style: TextStyle(fontStyle: FontStyle.italic),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ),
-              );
+                  ));
             }),
       ),
       floatingActionButton: FloatingActionButton(

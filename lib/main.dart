@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.blueGrey,
       ),
       home: HomeScreen(),
     );
@@ -40,6 +40,22 @@ class _MyAppState extends State<MyApp> {
   TextEditingController descrptionController = TextEditingController();
 
   final List<PostModel> posts = [];
+
+  // editPost(
+  //     String postId, String postTitle, String postSubtitle, String postDesc) {
+  //   final updatePost = PostModel(
+  //       id: postId,
+  //       title: postTitle,
+  //       subtitle: postSubtitle,
+  //       description: postDesc);
+  //   setState(() {
+  //     posts.replace(updatePost);
+  //   });
+  //   // var postId = posts.id.toString();
+  //   // var postTitle = post.title.toString();
+  //   // var postSubtitle = post.subtitle.toString();
+  //   // var postDesc = post.description.toString();
+  // }
 
   void addnewPost(String title, String subtitle, String desc) {
     final newPost = PostModel(

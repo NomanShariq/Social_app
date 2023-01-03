@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:social_app/model/post_model.dart';
 
 class UpdatePostScreen extends StatefulWidget {
-  UpdatePostScreen(this.posts);
+  const UpdatePostScreen(this.posts) : super(key: null);
 
   final PostModel posts;
 
@@ -11,20 +12,17 @@ class UpdatePostScreen extends StatefulWidget {
 }
 
 class _UpdatePostScreenState extends State<UpdatePostScreen> {
-  _UpdatePostScreenState();
-
-  String id = '';
   final _addformkey = GlobalKey<FormState>();
-  final _title = TextEditingController();
-  final _subtitle = TextEditingController();
-  final _description = TextEditingController();
-
-  @override
+  TextEditingController title = TextEditingController();
+  TextEditingController subtitle = TextEditingController();
+  TextEditingController description = TextEditingController();
+  String postTitle = '';
+  String postSubtitle = '';
+  String postDesc = '';
   void onInitState() {
-    id = widget.posts.id;
-    _title.text = widget.posts.title;
-    _subtitle.text = widget.posts.subtitle;
-    _description.text = widget.posts.description;
+    postTitle = widget.posts.title;
+    postSubtitle = widget.posts.subtitle;
+    postDesc = widget.posts.description;
     super.initState();
   }
 
@@ -59,7 +57,8 @@ class _UpdatePostScreenState extends State<UpdatePostScreen> {
                           style: TextStyle(fontSize: 24),
                         ),
                         TextFormField(
-                          controller: _title,
+                          initialValue: postTitle,
+                          controller: title,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -81,7 +80,7 @@ class _UpdatePostScreenState extends State<UpdatePostScreen> {
                           style: TextStyle(fontSize: 24),
                         ),
                         TextFormField(
-                          controller: _subtitle,
+                          controller: subtitle,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -103,7 +102,7 @@ class _UpdatePostScreenState extends State<UpdatePostScreen> {
                           style: TextStyle(fontSize: 24),
                         ),
                         TextFormField(
-                          controller: _description,
+                          controller: description,
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide(

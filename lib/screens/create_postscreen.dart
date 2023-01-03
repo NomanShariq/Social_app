@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class CreatePostScreen extends StatefulWidget {
   final Function addpost;

@@ -45,7 +45,11 @@ class PostDetails extends StatelessWidget {
                         iconSize: 30,
                         color: Colors.green,
                         onPressed: () {
-                          Get.to(() => UpdatePostScreen(post));
+
+
+                          Get.to(
+                            UpdatePostScreen(post),
+                          );
                         },
                         icon: Icon(Icons.edit)),
                     IconButton(
